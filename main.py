@@ -49,20 +49,20 @@ def baixar_arquivo(url, pasta_data):
     
     # --- PROTEÇÃO CONTRA DUPLICIDADE ---
     if os.path.exists(caminho_final):
-        print(f"⚠️ Arquivo já existe: {caminho_final}. Plando download.")
+        print(f" Arquivo já existe: {caminho_final}. Plando download.")
         return
     # -----------------------------------
 
-    print(f"⬇️ Baixando de: {url}")
+    print(f" Baixando de: {url}")
     try:
         with requests.get(url, stream=True) as r:
             r.raise_for_status()
             with open(caminho_final, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
-        print(f"✅ Sucesso! Salvo em: {caminho_final}")
+        print(f" Sucesso! Salvo em: {caminho_final}")
     except Exception as e:
-        print(f"❌ Erro no download: {e}")
+        print(f" Erro no download: {e}")
         # Remove arquivo corrompido/vazio se der erro
         if os.path.exists(caminho_final):
             os.remove(caminho_final)
